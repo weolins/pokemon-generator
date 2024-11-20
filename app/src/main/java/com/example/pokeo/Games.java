@@ -1,6 +1,7 @@
 package com.example.pokeo;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class Games {
             int randomNumber;
 
             do {
-                randomNumber = rand.nextInt(1015) + 1;
+                randomNumber = rand.nextInt(1025) + 1;
             } while (usedIds.contains(randomNumber));  // Regenerate if ID already used
 
             usedIds.add(randomNumber);
@@ -106,6 +107,51 @@ public class Games {
             JSONObject jsonObject = new JSONObject(response);
 
             // Extract name, pokedex number, and image URL from the response
+            String name = jsonObject.getString("name");
+            int pokedexNumber = jsonObject.getInt("id");
+            String image = jsonObject.getJSONObject("sprites").getString("front_default");
+
+            // Create a new Pokemon object
+            Pokemon pokemon = new Pokemon();
+            pokemon.setName(name);
+            pokemon.setPokedexNumber(pokedexNumber);
+            pokemon.setImage(image);
+            pokemonList.add(pokemon);
+        }
+
+        return pokemonList;
+    }
+    public static List<Pokemon> sexteam() throws Exception {
+        List<String> pokes = Arrays.asList(
+                "Machamp", "Rillaboom", "Gallade", "Incineroar", "Infernape", "Pangoro", "Zeraora", "Zarude", "Buzzwole", "Greninja",
+                "Beartic", "Okidogi", "Lucario", "Blaziken", "Annihilape", "Palafin-Hero", "Urshifu-Rapid-Strike", "Vaporeon", "Meowscarada", "Lopunny",
+                "Gardevoir", "Hatterene", "Delphox", "Lilligant", "Gothitelle", "meloetta-aria", "Roserade", "Salazzle", "Tsareena",
+                "Florges", "Primarina", "Ogerpon", "Diancie", "Magearna", "Pheromosa", "Iron-Valiant", "Guzzlord", "Ditto",
+                "Quaquaval"
+        );
+
+        List<Pokemon> pokemonList = new ArrayList<>();
+        Random rand = new Random();
+        Set<String> usedNames = new HashSet<>();
+
+        for (int i = 0; i < 6; i++) {
+            String pokemonName;
+
+            // Select a unique Pokémon name
+            do {
+                pokemonName = pokes.get(rand.nextInt(pokes.size()));
+            } while (usedNames.contains(pokemonName));
+
+            usedNames.add(pokemonName);
+            String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + pokemonName.toLowerCase();
+
+            // Fetch data using the fetchApiData function
+            String response = Helper.fetchApiData(apiUrl);
+
+            // Parse the response (assuming the response is in JSON format)
+            JSONObject jsonObject = new JSONObject(response);
+
+            // Extract name, Pokedex number, and image URL from the response
             String name = jsonObject.getString("name");
             int pokedexNumber = jsonObject.getInt("id");
             String image = jsonObject.getJSONObject("sprites").getString("front_default");

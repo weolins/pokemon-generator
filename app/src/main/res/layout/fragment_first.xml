@@ -15,13 +15,14 @@
         <!-- Radio Buttons -->
         <RadioGroup
             android:id="@+id/radio_group"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:gravity="center">
 
             <RadioButton
                 android:id="@+id/radio_true_random"
@@ -48,6 +49,15 @@
                 android:text="Colors"
                 android:textColor="@color/text_cyan"
                 android:buttonTint="@color/text_cyan" />
+
+            <RadioButton
+                android:id="@+id/radio_steam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hot"
+                android:textColor="@color/text_cyan"
+                android:buttonTint="@color/text_cyan"
+                android:visibility="gone"/>
         </RadioGroup>
 
         <!-- Pokemon Grid -->

@@ -16,11 +16,13 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.bumptech.glide.Glide;
 import com.example.pokeo.databinding.FragmentFirstBinding;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+    private int unlocker = 0;
 
     @Override
     public View onCreateView(
@@ -35,6 +37,7 @@ public class FirstFragment extends Fragment {
 
     private RadioGroup radioGroup;
     private TextView textViewDesc;
+    private RadioButton radioSexTeam;
     private List<Integer> imageViewIds = List.of(
             R.id.poke1, R.id.poke2, R.id.poke3, R.id.poke4, R.id.poke5, R.id.poke6
     );
@@ -48,6 +51,7 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         radioGroup = view.findViewById(R.id.radio_group);
         textViewDesc = view.findViewById(R.id.textview_desc);
+        radioSexTeam = view.findViewById(R.id.radio_steam);
         Button generateButton = view.findViewById(R.id.button_generate);
 
         generateButton.setOnClickListener(v -> {
@@ -69,6 +73,9 @@ public class FirstFragment extends Fragment {
     }
 
     private void generatePokemon(String method) {
+        if (unlocker == 3) {
+            radioSexTeam.setVisibility(View.VISIBLE);
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -79,12 +86,20 @@ public class FirstFragment extends Fragment {
                     if (method.equals("True Random")) {
                         textViewDesc.post(() -> textViewDesc.setText("Pokémon are being generated randomly."));
                         pokemonList = Games.randome();
+                        unlocker+=10;
                     } else if (method.equals("Colors")) {
                         pokemonList = Games.colorer();
                         if (pokemonList != null && !pokemonList.isEmpty()) {
                             String color = pokemonList.get(0).getColor();
                             String finalColor = "Your random color is: " + color;
                             textViewDesc.post(() -> textViewDesc.setText(finalColor));
+                            unlocker -=5;
+                        }
+                    }else if (method.equals("Hot")){
+                        pokemonList = Games.sexteam();
+                        if (pokemonList != null && !pokemonList.isEmpty()) {
+                            String finalinfo = "Your random sex team is being generated!";
+                            textViewDesc.post(() -> textViewDesc.setText(finalinfo));
                         }
                     } else {
                         pokemonList = Games.egger();
@@ -92,8 +107,10 @@ public class FirstFragment extends Fragment {
                             String eggGroup = pokemonList.get(0).getEgg();
                             String finalEggGroup = "Your random egg group is: " + eggGroup;
                             textViewDesc.post(() -> textViewDesc.setText(finalEggGroup));
+                            unlocker -=2;
                         }
                     }
+
                 } catch (Exception e) {
                     String errorMessage = "Error generating Pokémon: " + e.getMessage();
                     textViewDesc.post(() -> textViewDesc.setText(errorMessage));
