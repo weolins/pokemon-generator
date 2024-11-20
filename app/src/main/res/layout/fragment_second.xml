@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <RadioGroup
+            android:id="@+id/radio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/radio_monotype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Random Monotype"
+                android:paddingEnd="8dp"
+                android:textColor="@color/text_cyan"
+                android:buttonTint="@color/text_cyan"/>
+
+            <RadioButton
+                android:id="@+id/radio_letters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Random Letter"
+                android:paddingEnd="8dp"
+                android:textColor="@color/text_cyan"
+                android:buttonTint="@color/text_cyan"/>
+        </RadioGroup>
+
+        <!-- TextView for the message -->
+        <TextView
+            android:id="@+id/textview_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Your random monotype is:"
+            android:textSize="16sp"
+            android:textColor="@color/text_cyan"
+            app:layout_constraintTop_toBottomOf="@id/radio2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"/>
+
+        <!-- Large TextView for the letter/monotype -->
+        <TextView
+            android:id="@+id/textview_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/aclonica"
+            android:text="Example"
+            android:textColor="@color/text_cyan"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_message" />
+
+        <!-- TextView for the explanation -->
+        <TextView
+            android:id="@+id/textview_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="(You can only use Pokemon of that type)"
+            android:textSize="16sp"
+            android:textColor="@color/text_cyan"
+            app:layout_constraintTop_toBottomOf="@id/textview_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"/>
+
+        <!-- Generate Button -->
+        <Button
+            android:id="@+id/button_generate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Generate"
+            app:layout_constraintTop_toBottomOf="@id/textview_note"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <Button
+            android:id="@+id/button_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Random Team Generator"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/accent_pink"
+            app:layout_constraintTop_toBottomOf="@id/button_generate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
