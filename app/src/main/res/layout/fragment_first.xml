@@ -70,7 +70,8 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radio_group">
+            app:layout_constraintTop_toBottomOf="@id/radio_group"
+            android:visibility="gone">
 
             <!-- Pokemon 1 -->
             <LinearLayout

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class FirstFragment extends Fragment {
     private RadioGroup radioGroup;
     private TextView textViewDesc;
     private RadioButton radioSexTeam;
+    private GridLayout gridLayout;
     private List<Integer> imageViewIds = List.of(
             R.id.poke1, R.id.poke2, R.id.poke3, R.id.poke4, R.id.poke5, R.id.poke6
     );
@@ -53,6 +55,7 @@ public class FirstFragment extends Fragment {
         textViewDesc = view.findViewById(R.id.textview_desc);
         radioSexTeam = view.findViewById(R.id.radio_steam);
         Button generateButton = view.findViewById(R.id.button_generate);
+        gridLayout = view.findViewById(R.id.pokemon_grid);
 
         generateButton.setOnClickListener(v -> {
             int selectedId = radioGroup.getCheckedRadioButtonId();
@@ -76,6 +79,7 @@ public class FirstFragment extends Fragment {
         if (unlocker == 3) {
             radioSexTeam.setVisibility(View.VISIBLE);
         }
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -118,8 +122,12 @@ public class FirstFragment extends Fragment {
 
                 if (pokemonList != null) {
                     final List<Pokemon> finalPokemonList = pokemonList;
-                    requireActivity().runOnUiThread(() -> updatePokemonUI(finalPokemonList));
+                    requireActivity().runOnUiThread(() -> {
+                        updatePokemonUI(finalPokemonList);
+                        gridLayout.setVisibility(View.VISIBLE); // Move this here
+                    });
                 }
+
             }
         }).start();
     }
